@@ -1,0 +1,65 @@
+<!-- A really dumb experiment to play around in Vue.js -->
+<!-- by Andy Wong -->
+
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Cat Gallery</title>
+  </head>
+  <body>
+
+    <div id="app">
+      <h1>
+        {{ message }}
+      </h1>
+
+      <img :src="activeCat" alt="a cat" />
+
+      <p>
+        <button @click="prevCat">previous cat</button> | <button @click="nextCat">next cat</button>
+      </p>
+    </div>
+
+  </body>
+
+  <script src="http://cdn.jsdelivr.net/vue/2.0.3/vue.js"></script>
+  <script>
+    var vm = new Vue({
+      el: '#app',
+      data: {
+        message: 'Cat Gallery with Vue.js',
+        activeCat: 'img/001_cat.png',
+        catIndex: 0,
+        catImages: [
+          'img/001_cat.png',
+          'img/002_cat.jpg',
+          'img/003_cat.jpg',
+          'img/004_cat.jpg'
+        ]
+      },
+      computed: {
+      },
+      methods: {
+        prevCat: function() {
+          if (this.catIndex > 0) {
+            this.catIndex -= 1;
+          }
+          this.activeCat = this.catImages[this.catIndex];
+        },
+        nextCat: function() {
+          if (this.catIndex < this.catImages.length - 1) {
+            this.catIndex += 1;
+          }
+          this.activeCat = this.catImages[this.catIndex];
+        }
+      }
+    });
+  </script>
+
+  <style>
+    body {
+      font-family: Helvetica, Arial, sans-serif;
+    }
+  </style>
+
+</html>
