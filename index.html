@@ -16,7 +16,12 @@
       <img :src="activeCat" alt="a cat" />
 
       <p>
-        <button @click="prevCat">previous cat</button> | <button @click="nextCat">next cat</button>
+        Cat #: {{ catIndex + 1}}
+      </p>
+
+      <p>
+        <button @click="prevCat" :disabled="prevDisable">Previous Cat</button> |
+        <button @click="nextCat" :disabled="nextDisable">Next Cat</button>
       </p>
     </div>
 
@@ -38,6 +43,16 @@
         ]
       },
       computed: {
+        prevDisable: function() {
+          if (this.catIndex === 0) {
+            return true;
+          }
+        },
+        nextDisable: function() {
+          if (this.catIndex === this.catImages.length - 1) {
+            return true;
+          }
+        }
       },
       methods: {
         prevCat: function() {
